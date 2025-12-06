@@ -1,16 +1,21 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using CleverTap.WeatherSDK.Config;
 namespace CleverTap.WeatherSDK.WeatherAPI
 {
     public class WeatherService : IWeatherService
     {
-        private const string BASE_URL =
-            "https://api.open-meteo.com/v1/forecast?timezone=IST&current_weather=true&daily=temperature_2m_max";
+        private readonly WeatherURLConfig _config;
+
+        public WeatherService(WeatherURLConfig config)
+        {
+            _config = config;
+        }
 
         public async Task<float> GetCurrentTemperatureAsync(float lat, float lon)
         {
-            string url = $"{BASE_URL}&latitude={lat}&longitude={lon}";
+            string url = $"{_config.BaseUrl}&latitude={lat}&longitude={lon}";
             UnityWebRequest request = UnityWebRequest.Get(url);
 
             var operation = request.SendWebRequest();
@@ -32,7 +37,7 @@ namespace CleverTap.WeatherSDK.WeatherAPI
 
         public async Task<float> GetTodayMaxTemperatureAsync(float lat, float lon)
         {
-            string url = $"{BASE_URL}&latitude={lat}&longitude={lon}";
+            string url = $"{_config.BaseUrl}&latitude={lat}&longitude={lon}";
             UnityWebRequest request = UnityWebRequest.Get(url);
 
             var operation = request.SendWebRequest();
