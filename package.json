@@ -1,5 +1,5 @@
 {
-  "name": "clevertap-weather-unity-sdk",
+  "name": "com.clevertap.weather",
   "version": "1.0.0",
   "displayName": "CleverTap Weather Unity SDK",
   "description": "CleverTap Weather SDK for feather weather data from cloud"
