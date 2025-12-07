@@ -1,4 +1,7 @@
-public interface IToastService
+namespace CleverTap.WeatherSDK.ToastSystem
 {
-    void Show(string message);
+    public interface IToastService
+    {
+        void Show(string message);
+    }
 }
