@@ -10,37 +10,51 @@ namespace CleverTap.WeatherSDK.WeatherAPI
         public static WeatherManager Instance => _instance ??= new WeatherManager();
         private IWeatherService _weatherService;
         public IWeatherService WeatherService => _weatherService;
-
-        #region URL's
-        private string weatherBaseURL = "https://api.open-meteo.com/v1/forecast?timezone=IST&current_weather=true&daily=temperature_2m_max";
-        #endregion
+        private IToastService _toastService;
+        public IToastService ToastService => _toastService;
 
         #region CACHE
         private float? _cachedTodayMaxTemp = null;
         private float? _cachedCurrentTemp = null;
         #endregion
 
-        private WeatherManager()
+        private WeatherManager() { }
+
+        private void EnsureInitialized()
         {
-            var config = new Config.WeatherURLConfig(weatherBaseURL);
-            _weatherService = new WeatherService(config);
+            if (_weatherService == null || _toastService == null)
+                throw new System.Exception("WeatherManager not initialized. Call Initialize() first.");
         }
         #region PUBLIC API
+        public void Initialize(IWeatherService weatherService = null, IToastService toastService = null)
+        {
+            // If app doesn’t provide services, use SDK defaults
+            _weatherService = weatherService ?? new WeatherService(DefaultWeatherConfig.Default);
+
+#if UNITY_ANDROID
+            _toastService = toastService ?? new AndroidToastService();
+#elif UNITY_IOS
+            _toastService = toastService ?? new IOSToastService();
+#else
+            _toastService = toastService ?? new EditorToastService();
+#endif
+        }
         public void ShowMessageToast(string message)
         {
-            ToastService.Show(message);
+            EnsureInitialized();
+            _toastService.Show(message);
         }
         public async Task ShowTodayMaxTemperatureToast(float latitude, float longitude, bool useCache = true)
         {
             float temp = await GetTodayMaxTemperature(latitude, longitude, useCache);
-
-            ToastService.Show($"Today Max Temp: {temp}°C");
+            EnsureInitialized();
+            _toastService.Show($"Today Max Temp: {temp}°C");
         }
         public async Task ShowCurrentTemperatureToast(float latitude, float longitude, bool useCache = true)
         {
             float temp = await GetCurrentTemperature(latitude, longitude, useCache);
-
-            ToastService.Show($"Current Temp: {temp}°C");
+            EnsureInitialized();
+            _toastService.Show($"Current Temp: {temp}°C");
         }
         public async Task<float> GetTodayMaxTemperature(float latitude, float longitude, bool useCache = true)
         {

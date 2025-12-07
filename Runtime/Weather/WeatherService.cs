@@ -7,12 +7,10 @@ namespace CleverTap.WeatherSDK.WeatherAPI
     public class WeatherService : IWeatherService
     {
         private readonly WeatherURLConfig _config;
-
-        public WeatherService(WeatherURLConfig config)
+        public WeatherService(WeatherURLConfig config = null)
         {
-            _config = config;
+            _config = config ?? WeatherSDK.Config.DefaultWeatherConfig.Default;
         }
-
         public async Task<float> GetCurrentTemperatureAsync(float lat, float lon)
         {
             string url = $"{_config.BaseUrl}&latitude={lat}&longitude={lon}";

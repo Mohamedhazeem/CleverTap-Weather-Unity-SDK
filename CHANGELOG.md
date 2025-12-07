@@ -2,6 +2,27 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+[1.0.5] - 2025-12-07
+###Changed
+
+- Refactored ToastService to support platform-specific dependency injection (IToastService) instead of static calls.
+
+- Added default toast implementations for Android, iOS, and Editor.
+
+- Removed internal static instantiation of toast service from WeatherManager.
+
+- WeatherManager now supports custom toast service injection.
+
+- Fully SOLID-compliant toast architecture (Open/Closed & Dependency Inversion).
+
+- WeatherManager initialization updated to allow SDK default config or app-provided services.
+
+###Fixed
+
+- Fixed toast service initialization to prevent null reference exceptions when showing messages.
+
+- Ensured toast behavior works consistently across Editor, Android, and iOS.
+
 ## [1.0.4] - 2025-12-07
 
 ### Removed
