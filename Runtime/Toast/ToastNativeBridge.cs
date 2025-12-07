@@ -13,21 +13,11 @@ namespace CleverTap.WeatherSDK.ToastSystem
 
         activity.Call("runOnUiThread", new AndroidJavaRunnable(() =>
         {
-            using (AndroidJavaClass toastClass = new AndroidJavaClass("android.widget.Toast"))
-            using (AndroidJavaClass gravityClass = new AndroidJavaClass("android.view.Gravity"))
-            {
-                AndroidJavaObject toast = toastClass.CallStatic<AndroidJavaObject>(
+            using (AndroidJavaClass toastClass = new AndroidJavaClass("android.widget.Toast")){
+             AndroidJavaObject toast = toastClass.CallStatic<AndroidJavaObject>(
                     "makeText", activity, message, 0
                 );
-
-                int gravity = gravityClass.GetStatic<int>("TOP") |
-                              gravityClass.GetStatic<int>("CENTER_HORIZONTAL");
-
-                toast.Call("setGravity", gravity, 0, 150);  
-                // last param is Y offset (move slightly down from top)
-
-                toast.Call("show");
-            }
+                toast.Call("show");}           
         }));
     }
         }

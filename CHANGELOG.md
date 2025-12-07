@@ -2,6 +2,12 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [1.0.4] - 2025-12-07
+
+### Removed
+
+- Removed Android Toast gravity to Top-Center behavior because this not work on modern android.
+
 ## [1.0.3] - 2025-12-07
 
 ### Added
@@ -12,7 +18,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated Android Toast gravity to Top-Center behavior.
+- Updated Android Toast behavior to attempt Top-Center positioning (later removed in 1.0.4 due to OS restrictions).
 
 ## [1.0.1] - 2025-12-07
 
