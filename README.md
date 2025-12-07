@@ -18,8 +18,8 @@ This SDK is built for the CleverTap Unity Developer Assignment.
 - Fetch **current temperature** using latitude + longitude
 - Fetch **today's max temperature** using latitude + longitude
 - Clean JSON models
-- Async API calls (`HttpClient`)
-- Interface-driven (IWeatherService)
+- Async API calls
+- Interface-driven (`IWeatherService`, `IToastService` )
 
 ### Platform UI
 

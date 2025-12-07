@@ -2,7 +2,26 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-[1.0.5] - 2025-12-07
+## [1.0.6] - 2025-12-07
+
+### Added
+
+- Added PlayMode and EditMode test coverage for WeatherManager.
+- Added mock services (MockWeatherService, MockToastService) to support isolated testing.
+- Added coroutine extension helper (`AsCoroutine()`) for testing async weather requests in PlayMode.
+
+### Changed
+
+- Improved test assembly definitions to correctly separate EditMode and PlayMode tests.
+- Updated WeatherManager to better support test-time dependency injection.
+
+### Fixed
+
+- Fixed issues where tests appeared only in PlayMode due to incorrect asmdef references.
+- Resolved missing namespace issues (`IEnumerator`) in PlayMode tests.
+- Fixed mock toast service behavior by adding `LastMessage` property.
+
+##[1.0.5] - 2025-12-07
 ###Changed
 
 - Refactored ToastService to support platform-specific dependency injection (IToastService) instead of static calls.
