@@ -26,6 +26,10 @@ namespace CleverTap.WeatherSDK.WeatherAPI
             _weatherService = new WeatherService(config);
         }
         #region PUBLIC API
+        public void ShowMessageToast(string message)
+        {
+            ToastService.Show(message);
+        }
         public async Task ShowTodayMaxTemperatureToast(float latitude, float longitude, bool useCache = true)
         {
             float temp = await GetTodayMaxTemperature(latitude, longitude, useCache);
