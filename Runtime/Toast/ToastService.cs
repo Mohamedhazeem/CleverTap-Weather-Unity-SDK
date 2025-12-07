@@ -7,9 +7,9 @@ namespace CleverTap.WeatherSDK.ToastSystem
         public static void Show(string message)
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            NativeBridge.ShowAndroidToast(message);
+            ToastNativeBridge.ShowAndroidToast(message);
 #elif UNITY_IOS && !UNITY_EDITOR
-            NativeBridge.ShowIOSToast(message);
+            ToastNativeBridge.ShowIOSToast(message);
 #else
             Debug.Log("[ToastSDK] " + message);
 #endif
