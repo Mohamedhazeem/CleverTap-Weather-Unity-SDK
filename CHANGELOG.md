@@ -18,3 +18,9 @@ All notable changes to this project will be documented in this file.
 - Unit test examples
 - Example Weather App usage
 - Full README documentation
+
+## [1.0.1] - 2025-12-07
+
+### Added
+
+- Show any toast message function
